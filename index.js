@@ -1,42 +1,28 @@
-const dotenv = require('dotenv');
-dotenv.config();
+import express from 'express';
+import session from 'express-session';
+import checkIfAuthorized from './components/checkIfAuthorized.js';
+import connectDb from './components/db.js';
+import './components/env.js';
+import AuthRouter from './routes/auth.js';
+import BusinessRouter from './routes/business.js';
 
-const express = require('express')
-const bodyParser = require('body-parser')
+await connectDb();
 
-//local imports
-const connectDb = require('./db.js');
 const app = express();
-
-
-const mongoose = require('mongoose');
-
-
-//middleware
-app.use(bodyParser.json());
-
-// handle JSON requests and responses nicely
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
 
-//this is a dummy GET request
-app.get('/dummy', (req, res) => {
-    res.send('Hello World');
+app.use('/api/auth', AuthRouter);
+app.use('/api/business', checkIfAuthorized, BusinessRouter);
+
+app.get('/', (req, res) => {
+    res.send(JSON.stringify(req.session));
+})
+
+app.listen(process.env.PORT || 8080, () => {
+    console.log(`Server is running on port ${process.env.PORT || 8080}`);
 });
-
-// start the application so that it listens at port 8081
-const port = process?.env?.PORT || 8081;
-
-//http://localhost:8081/dummy
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-});
-
-connectDb()
-    .then(() => {
-        console.log('Successfully connect to MongoDB.');
-    })
-    .catch((err) => {
-        console.error('Connection error', err);
-        process.exit();
-    });
