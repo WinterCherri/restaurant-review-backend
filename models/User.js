@@ -14,6 +14,19 @@ const UserSchema = new Schema({
     photo: {
         type: String
     },
+    memberOf: {
+        type: [{
+            type: {
+                type: String,
+                enum: ["admin", "member"]
+            },
+            business: {
+                type: Schema.Types.ObjectId,
+                ref: "Business"
+            }
+        }],
+        default: []
+    },
     credentials: [{
         type: {
             type: String,

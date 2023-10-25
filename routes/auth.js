@@ -3,6 +3,7 @@ import { Router } from "express";
 import { generators } from "openid-client";
 import getGoogleClient from "../components/OAuthClients.js";
 import GoogleCredential from "../models/GoogleCredential.js";
+import PasswordCredential from "../models/PasswordCredential.js";
 import User from "../models/User.js";
 
 const AuthRouter = Router();
@@ -40,7 +41,8 @@ AuthRouter.get("/login/GoogleCredential", (req, res) => {
         redirect_uri: process.env.URL + "/api/auth/callback/GoogleCredential",
         code_challenge: codeChallenge,
         code_challenge_method: "S256",
-        access_type: 'offline'
+        access_type: 'offline',
+        prompt: 'consent'
     });
     req.session.codeVerifier = codeVerifier;
     res.redirect(url);
