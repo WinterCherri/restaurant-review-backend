@@ -1,0 +1,65 @@
+{
+    "restaurants": [
+      {
+        "id": 1,
+        "name": "Delicious Diner",
+        "cuisine": "American",
+        "rating": 4.5,
+        "reviews": [
+          {
+            "id": 101,
+            "user": "User1",
+            "comment": "Great food and friendly staff!",
+            "rating": 5
+          },
+          {
+            "id": 102,
+            "user": "User2",
+            "comment": "Decent food, but slow service.",
+            "rating": 3
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Pizza Paradise",
+        "cuisine": "Italian",
+        "rating": 4.0,
+        "reviews": [
+          {
+            "id": 201,
+            "user": "User3",
+            "comment": "Best pizza in town!",
+            "rating": 5
+          },
+          {
+            "id": 202,
+            "user": "User4",
+            "comment": "Good pizza but a bit pricey.",
+            "rating": 4
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Sushi Sensation",
+        "cuisine": "Japanese",
+        "rating": 4.2,
+        "reviews": [
+          {
+            "id": 301,
+            "user": "User5",
+            "comment": "Fresh and delicious sushi!",
+            "rating": 5
+          },
+          {
+            "id": 302,
+            "user": "User6",
+            "comment": "Sushi was okay, nothing special.",
+            "rating": 3
+          }
+        ]
+      }
+    ]
+  }
+  
